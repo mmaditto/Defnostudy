@@ -3,23 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine? ❤️</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <title>Valentine's Surprise ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="floating-elements" class="floating-elements"></div>
-
     <div class="container">
-        <h1 id="valentineTitle"></h1>
-
-        <div id="musicControls" class="music-controls">
+        <div class="music-controls">
             <button id="musicToggle" class="cute-btn">🎵 Play Music</button>
             <audio id="bgMusic" loop preload="auto">
                 <source src="music.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
             </audio>
         </div>
 
@@ -29,20 +22,14 @@
                 <button class="cute-btn" id="yesBtn1">Yes</button>
                 <button class="cute-btn" id="noBtn1">No</button>
             </div>
-            
-            <div class="secret-answer">
-                <button class="cute-btn special" id="secretAnswerBtn"></button>
-            </div>
+            <button class="cute-btn hidden" id="secretAnswerBtn" style="margin-top: 50px; width: 100%; background: #ff4757;"></button>
         </div>
 
         <div class="question-section hidden" id="question2">
             <h2 id="question2Text"></h2>
             <div class="love-meter">
                 <input type="range" min="0" max="10000" value="100" class="slider" id="loveMeter">
-                <p>
-                    <span id="startText"></span>
-                    <span id="loveValue">100</span>
-                </p>
+                <p><span id="startText"></span> <span id="loveValue">100</span></p>
                 <p id="extraLove" class="hidden"></p>
             </div>
             <button class="cute-btn" id="nextBtn">Next</button>
@@ -58,8 +45,8 @@
 
         <div class="celebration hidden" id="celebration">
             <h2 id="celebrationTitle"></h2>
-            <p id="celebrationMessage" class="celebration-text"></p>
-            <p id="celebrationEmojis" class="celebration-emojis"></p>
+            <p id="celebrationMessage"></p>
+            <p id="celebrationEmojis" style="font-size: 3rem;"></p>
         </div>
     </div>
 
