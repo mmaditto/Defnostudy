@@ -2,34 +2,45 @@ const music = document.getElementById('bgMusic');
 let totalClicks = 0; 
 let yesScale = 1;
 
-// --- STEP 1: START VALENTINE & UNLOCK MUSIC ---
+// --- STEP 1: START & FORCE MUSIC ---
 document.getElementById('startValentine').onclick = () => {
     if (music) {
-        music.play().catch(() => console.log("Music waiting for interaction"));
+        music.play().then(() => {
+            console.log("Music Playing");
+        }).catch(() => {
+            // Fallback for strict browsers
+            console.log("Music blocked, waiting for next click");
+        });
     }
     document.getElementById('page0').classList.add('hidden');
     document.getElementById('question1').classList.remove('hidden');
 };
 
-// --- STEP 2: CHAOS LOGIC ---
+// --- STEP 2: MOBILE-SAFE CHAOS ---
 function handleChaos() {
     totalClicks++;
     if (navigator.vibrate) navigator.vibrate(50);
 
+    // Force music play again in case it failed the first time
+    if (music && music.paused) music.play();
+
     const yesBtn = document.getElementById('yesBtn1');
     const noBtn = document.getElementById('noBtn1');
 
-    // Grow Yes (capped)
-    if (yesScale < 1.8) {
-        yesScale += 0.25;
+    // Grow Yes but keep it reasonable for mobile
+    if (yesScale < 1.6) {
+        yesScale += 0.2;
         yesBtn.style.transform = `scale(${yesScale})`;
     }
 
-    // Move buttons
+    // Move buttons - Stays within the center area so they aren't lost
     [yesBtn, noBtn].forEach(btn => {
         btn.style.position = 'fixed';
-        btn.style.left = Math.random() * 60 + 20 + 'vw';
-        btn.style.top = Math.random() * 60 + 20 + 'vh';
+        // Keeps buttons between 20% and 70% of the screen width/height
+        const randomX = Math.floor(Math.random() * 50) + 20; 
+        const randomY = Math.floor(Math.random() * 50) + 25;
+        btn.style.left = randomX + 'vw';
+        btn.style.top = randomY + 'vh';
     });
 
     // Reveal Secret
@@ -45,7 +56,6 @@ document.getElementById('noBtn1').onclick = handleChaos;
 
 // --- STEP 3: PROCEED ---
 document.getElementById('secretAnswerBtn').onclick = () => {
-    alert(CONFIG.questions.first.secretAnswer);
     document.getElementById('question1').classList.add('hidden');
     document.getElementById('question2').classList.remove('hidden');
     
@@ -70,12 +80,12 @@ document.getElementById('nextBtn').onclick = () => {
     document.getElementById('question3Text').innerText = `Will you be my Valentine, ${CONFIG.valentineName}?`;
 };
 
-// No button for final question
+// No button for final question - also stays in zone
 document.getElementById('noBtn3').onclick = () => {
     const btn = document.getElementById('noBtn3');
     btn.style.position = 'fixed';
-    btn.style.left = Math.random() * 70 + 'vw';
-    btn.style.top = Math.random() * 70 + 'vh';
+    btn.style.left = (Math.random() * 50 + 20) + 'vw';
+    btn.style.top = (Math.random() * 50 + 20) + 'vh';
 };
 
 document.getElementById('yesBtn3').onclick = () => {
