@@ -11,24 +11,40 @@ window.onload = () => {
 };
 
 // --- 3. First Question Logic (The Music Trigger) ---
+// --- 3. First Question Logic (The Music Trigger) ---
 document.getElementById('yesBtn1').onclick = () => {
-    // START THE MUSIC IMMEDIATELY
+    // 1. HARDENED MUSIC TRIGGER
+    const music = document.getElementById('bgMusic');
     if (music) {
-        music.play().catch(e => console.log("Music play blocked by browser, trying again on next click"));
-        if (musicBtn) musicBtn.innerText = "⏸ Pause Music";
+        music.muted = false; // Ensure it's not muted
+        music.load();        // Force a fresh load from the source
+        
+        let playPromise = music.play();
+
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                console.log("Music started successfully!");
+                const musicBtn = document.getElementById('musicToggle');
+                if (musicBtn) musicBtn.innerText = "⏸ Pause Music";
+            }).catch(error => {
+                console.log("Playback failed. Browser block or file error:", error);
+            });
+        }
     }
 
-    // Show the secret message from your config
+    // 2. SECRET MESSAGE & TRANSITION
     alert(CONFIG.questions.first.secretAnswer);
-
-    // Transition to Love Meter
     document.getElementById('question1').classList.add('hidden');
     document.getElementById('question2').classList.remove('hidden');
 
-    // Load second question text
+    // Load second question text from config
     document.getElementById('question2Text').innerText = CONFIG.questions.second.text;
     document.getElementById('startText').innerText = CONFIG.questions.second.startText;
     document.getElementById('nextBtn').innerText = CONFIG.questions.second.nextBtn;
+};
+
+document.getElementById('noBtn1').onclick = () => {
+    alert("Try again 😉");
 };
 
 document.getElementById('noBtn1').onclick = () => {
