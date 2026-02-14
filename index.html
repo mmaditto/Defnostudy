@@ -1,44 +1,32 @@
-<div class="container">
-    <div class="question-section" id="page0">
-        <h1 class="celebration-title">Happy Valentine's Day! ❤️</h1>
-        <button class="cute-btn" id="startValentine">Enter ✨</button>
-    </div>
-
-    <div class="question-section hidden" id="question1">
-        <h2 id="questionText">Do you like me twin?</h2>
-        <div class="btn-group">
-            <button class="cute-btn" id="yesBtn1">Yes</button>
-            <button class="cute-btn" id="noBtn1">No</button>
-        </div>
-        <button class="cute-btn hidden" id="secretAnswerBtn"></button>
-    </div>
-    
-</div>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valentine's Surprise ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="bg-layer"></div>
+
     <div class="container">
-        <div class="music-controls">
-            <button id="musicToggle" class="cute-btn">🎵 Play Music</button>
-            <audio id="bgMusic" loop preload="auto">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-            </audio>
+        <audio id="bgMusic" loop preload="auto">
+            <source src="music.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="question-section" id="page0">
+            <h1 class="celebration-title">Happy Valentine's Day! ❤️</h1>
+            <button class="cute-btn" id="startValentine">Enter ✨</button>
         </div>
 
-        <div class="question-section" id="question1">
-            <h2 id="questionText">Do you like me?</h2>
-            <div class="btn-group">
+        <div class="question-section hidden" id="question1">
+            <h2 id="questionText">Do you like me twin?</h2>
+            <div class="btn-group" id="mainBtnGroup">
                 <button class="cute-btn" id="yesBtn1">Yes</button>
                 <button class="cute-btn" id="noBtn1">No</button>
             </div>
-            <button class="cute-btn hidden" id="secretAnswerBtn" style="margin-top: 50px; width: 100%; background: #ff4757;"></button>
+            <button class="cute-btn hidden" id="secretAnswerBtn"></button>
         </div>
 
         <div class="question-section hidden" id="question2">
@@ -62,7 +50,7 @@
         <div class="celebration hidden" id="celebration">
             <h2 id="celebrationTitle"></h2>
             <p id="celebrationMessage"></p>
-            <p id="celebrationEmojis" style="font-size: 3rem;"></p>
+            <div id="celebrationEmojis" style="font-size: 3rem;"></div>
         </div>
     </div>
 
