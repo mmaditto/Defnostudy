@@ -1,13 +1,22 @@
 const music = document.getElementById('bgMusic');
-const musicBtn = document.getElementById('musicToggle');
-let noCount = 0;
-let yesScale = 1;
 
-window.onload = () => {
-    document.getElementById('questionText').innerText = CONFIG.questions.first.text;
-    document.getElementById('yesBtn1').innerText = CONFIG.questions.first.yesBtn;
-    document.getElementById('noBtn1').innerText = CONFIG.questions.first.noBtn;
-};
+// Function to force play
+function forcePlayMusic() {
+    if (music) {
+        music.muted = false;
+        music.volume = 1.0;
+        music.play().then(() => {
+            console.log("Music started!");
+            document.getElementById('musicToggle').innerText = "⏸ Pause Music";
+        }).catch(err => {
+            console.log("Still blocked, trying again...");
+        });
+    }
+}
+
+// Add this to both the Yes button and Secret button
+document.getElementById('yesBtn1').addEventListener('click', forcePlayMusic);
+document.getElementById('secretAnswerBtn').addEventListener('click', forcePlayMusic);
 
 // --- First Question: The "No" Chaos ---
 document.getElementById('noBtn1').onclick = () => {
