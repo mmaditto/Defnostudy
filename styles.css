@@ -1,4 +1,4 @@
-* { box-sizing: border-box; }
+* { box-sizing: border-box; touch-action: manipulation; }
 
 body {
     margin: 0;
@@ -7,9 +7,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: #ffafbd; /* Fallback color */
-    overflow: hidden;
+    height: 100vh;
+    height: -webkit-fill-available;
+    background: #ffafbd;
+    overflow: hidden; /* Stops the screen from scrolling when buttons move */
 }
 
 .bg-layer {
@@ -20,13 +21,14 @@ body {
 }
 
 .container {
-    width: 90%;
-    max-width: 400px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 85%;
+    max-width: 350px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     text-align: center;
     z-index: 10;
 }
@@ -35,27 +37,28 @@ body {
 
 .celebration-title {
     font-family: 'Dancing Script', cursive;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: #ff4757;
-    animation: heartbeat 1.5s infinite;
 }
 
 .cute-btn {
-    padding: 12px 25px;
+    padding: 15px 25px;
     margin: 10px;
     border: none;
-    border-radius: 30px;
+    border-radius: 50px;
     background: #ff6b6b;
     color: white;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
     transition: transform 0.2s ease;
 }
 
-/* Fixes the "Yes" and "No" jumping smoothly */
-#yesBtn1, #noBtn1 {
+/* Movement boundaries for Mobile */
+#yesBtn1, #noBtn1, #noBtn3 {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 100;
 }
 
 #secretAnswerBtn {
@@ -63,22 +66,13 @@ body {
     width: 100%;
     background: #ff4757;
     margin-top: 20px;
-    font-weight: bold;
     animation: pulse 1.5s infinite;
 }
 
-@keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
 @keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); }
-    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
     100% { transform: scale(1); }
 }
 
-.slider {
-    width: 100%;
-    margin: 20px 0;
-}
+.slider { width: 100%; margin: 20px 0; }
