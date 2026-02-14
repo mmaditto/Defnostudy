@@ -1,3 +1,23 @@
+// Music Controller
+const music = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicToggle');
+
+musicBtn.onclick = () => {
+    if (music.paused) {
+        music.play().catch(e => console.log("Music play blocked"));
+        musicBtn.innerText = "⏸ Pause Music";
+    } else {
+        music.pause();
+        musicBtn.innerText = "🎵 Play Music";
+    }
+};
+
+// Ensure the first question shows up immediately
+window.onload = () => {
+    document.getElementById('questionText').innerText = CONFIG.questions.first.text;
+    document.getElementById('yesBtn1').innerText = CONFIG.questions.first.yesBtn;
+    document.getElementById('noBtn1').innerText = CONFIG.questions.first.noBtn;
+};
 // First Question
 document.getElementById("question1Text").innerText = CONFIG.questions.first.text;
 document.getElementById("yesBtn1").innerText = CONFIG.questions.first.yesBtn;
